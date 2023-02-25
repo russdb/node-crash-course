@@ -10,6 +10,9 @@ readStream.on('data', (chunk) => {
   console.info(`\n------------------WRITING NEW CHUNK------------------\n`)
   writeStream.write(chunk)
 })
+const writeStreamPipe = fs.createWriteStream('./docs/blog5.txt')
 
 //simple piping
-readStream.pipe(writeStream)
+readStream.pipe(writeStreamPipe)
+
+//look further into duplex piping.
