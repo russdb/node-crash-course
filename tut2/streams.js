@@ -10,3 +10,6 @@ readStream.on('data', (chunk) => {
   console.info(`\n------------------WRITING NEW CHUNK------------------\n`)
   writeStream.write(chunk)
 })
+
+//simple piping
+readStream.pipe(writeStream)
