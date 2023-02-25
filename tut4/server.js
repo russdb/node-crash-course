@@ -10,16 +10,16 @@ const server = http.createServer((req, res) => {
 
   switch (req.url) {
     case '/':
-      path+= 'index.html'
+      path += 'index.html'
       break;
     case '/about':
-      path+= 'about.html'
+      path += 'about.html'
       break;
-    default: path+= '404.html'
+    default: path += '404.html'
       break;
   }
   //read the file 
-  fs.readFile('./views/index.html', (err, data) => {
+  fs.readFile(path, (err, data) => {
     if (err) {
       console.error(err)
       res.end()
