@@ -2,6 +2,8 @@
  * instead of restarting server manually, lets use nodemon
  * npm install -g nodemon
  * to use: nodemon fileName
+ * this will be added to my package.json file
+ * but added to gitignore
  */
 
 const http = require('http')
@@ -32,7 +34,7 @@ const server = http.createServer((req, res) => {
       res.statusCode = 200
       break;
     //redirect
-    case '/about-me':
+    case '/about-us':
       res.statusCode = 301
       res.setHeader('Location', '/about')
       res.end()
