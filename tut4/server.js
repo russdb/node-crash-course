@@ -6,7 +6,18 @@ const server = http.createServer((req, res) => {
   //add a response to make the webpage do something other than hang when making a request
   //need to set headers first, content type first
   res.setHeader('Content-Type', 'text/html') //can be plain,html, etc
-  
+  let path = `./views/`
+
+  switch (req.url) {
+    case '/':
+      path+= 'index.html'
+      break;
+    case '/about':
+      path+= 'about.html'
+      break;
+    default: path+= '404.html'
+      break;
+  }
   //read the file 
   fs.readFile('./views/index.html', (err, data) => {
     if (err) {
@@ -16,8 +27,6 @@ const server = http.createServer((req, res) => {
     else {
       // res.write(data) //just one var so put data in the end function
       res.end(data) //this actually sends the write() back to the browser
-
-      
     }
   })
 })
