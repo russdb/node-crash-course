@@ -1,14 +1,25 @@
 const http = require('http')
+const fs = require('fs')
 const server = http.createServer((req, res) => {
   // console.info(req)
   console.info(`${req.url}, ${req.method}`)
   //add a response to make the webpage do something other than hang when making a request
   //need to set headers first, content type first
   res.setHeader('Content-Type', 'text/html') //can be plain,html, etc
-  res.write(`<h3>hello world</h3>`)
-  res.write(`<h4>hello world</h4>`)
-  //etc etc
-  res.end() //this actually sends the write() back to the browser
+  
+  //read the file 
+  fs.readFile('./views/index.html', (err, data) => {
+    if (err) {
+      console.error(err)
+      res.end()
+    }
+    else {
+      // res.write(data) //just one var so put data in the end function
+      res.end(data) //this actually sends the write() back to the browser
+
+      
+    }
+  })
 })
 
 //check the dev tools network tab and look for localhost to see the request details in browser
