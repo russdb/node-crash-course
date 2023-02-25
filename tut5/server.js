@@ -1,3 +1,9 @@
+/**
+ * instead of restarting server manually, lets use nodemon
+ * npm install -g nodemon
+ * to use: nodemon fileName
+ */
+
 const http = require('http')
 const fs = require('fs')
 const server = http.createServer((req, res) => {
