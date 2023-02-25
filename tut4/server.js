@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
     400 range - user or client errors
     500 range - server errors
   */ 
-
+  //this is where express.js can help, but here it is under the hood
   switch (req.url) {
     case '/':
       path += 'index.html'
@@ -24,6 +24,12 @@ const server = http.createServer((req, res) => {
     case '/about':
       path += 'about.html'
       res.statusCode = 200
+      break;
+    //redirect
+    case '/about-me':
+      res.statusCode = 301
+      res.setHeader('Location', '/about')
+      res.end()
       break;
     default: path += '404.html'
       res.statusCode = 404
