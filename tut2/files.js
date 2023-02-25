@@ -18,3 +18,16 @@ fs.writeFile('./docs/blog1.txt', 'hello, world', () => {
 fs.writeFile('./docs/blog2.txt', 'hello, world', () => {
   console.info(`files written`)
 })
+
+//directories
+if (!fs.existsSync('./assets')) {
+  fs.mkdir('./assets', (err) => {
+    if (err) console.error(err)
+    console.info(`folder created`)
+  })
+} else {
+  fs.rmdir('./assets', (err) => {
+    if (err) console.error(err)
+    console.info(`folder deleted`)
+  })
+}
