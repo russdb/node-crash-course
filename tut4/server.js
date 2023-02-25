@@ -8,6 +8,14 @@ const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/html') //can be plain,html, etc
   let path = `./views/`
 
+  /* Responses
+    100 range - informational
+    200 range - success codes
+    300 range - codes for redirects
+    400 range - user or client errors
+    500 range - server errors
+  */ 
+
   switch (req.url) {
     case '/':
       path += 'index.html'
