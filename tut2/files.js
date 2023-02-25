@@ -31,3 +31,10 @@ if (!fs.existsSync('./assets')) {
     console.info(`folder deleted`)
   })
 }
+
+if (fs.existsSync('./docs/deleteme.txt')) {
+  fs.unlink('./docs/deleteme.txt', (err) => {
+    if (err) console.error(err)
+    console.info('file deleted')
+  })
+}
