@@ -27,42 +27,6 @@ app.use(express.static('public'))
 //add middleware
 app.use(morgan('dev'))
 
-//mongoose and mongo sanbox routes
-app.get('/add-blog', (req,res) => {
-  //be sure to import the model
-  const blog = new Blog({
-    title: 'New Blog 2',
-    snippet: 'about my new blog',
-    body: 'more about my new blog'
-  })
-blog.save() //promise
-    .then((results) => {
-      res.send(results)
-    })
-    .catch((err) => {
-      console.warn(err)
-    })
-})
-
-app.get('/all-blogs', (req,res) => {
-  Blog.find() //promise
-    .then(function(result) {
-      res.send(result)
-    })
-    .catch(function(err){
-      console.warn(err)
-    })
-})
-
-app.get('/single-blog', function(req,res) {
-  Blog.findById('63fbca233847032c5c315814')
-    .then((result) => {
-      res.send(result)
-    })
-    .catch((err) => {
-      console.warn(err)
-    })
-})
 
 //middleware must go above .get, since it sends the response back on a match and it stops reading the file
 //respond to requests
