@@ -20,14 +20,14 @@ mongoose.connect(dbURI) //async
 // register view engine with express
 app.set('view engine', 'ejs')
 
-
 // middleware & static files
 app.use(express.static('public'))
+//take all url encoded data and pass into object
+app.use(express.urlencoded({ extended: true }))
 
 //add middleware
 app.use(morgan('dev'))
 //middleware must go above .get(), since it sends the response back on a match and it stops reading the file
-
 
 //respond to requests & route
 app.get('/', (req,res) => {
@@ -44,6 +44,17 @@ app.get('/blogs', function(req,res){
     .then( (result) => { res.render('index',{title: 'All Blogs', blogs: result}) })
     .catch((err) => {console.warn(err)})
 })
+
+app.post('/blogs', function(req,res){
+  const blog = new Blog(req.body)
+
+  blog.save()
+    .then((result) => {
+      res.redirect('/blogs')
+    })
+    .catch((err) => console.error(err))
+})
+
 //create blog post
 app.get('/blogs/create', (req,res) => {
   res.render('create', {title: 'Create'})
