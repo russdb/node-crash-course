@@ -55,6 +55,16 @@ app.post('/blogs', function(req,res){
     .catch((err) => console.error(err))
 })
 
+app.get('/blogs/:id', function(req,res) {
+  const id = req.params.id //same name as ':id" in previous line
+  console.info(id)
+   Blog.findById(id)
+    .then((result) => {
+      res.render('details', { blog: result, title: 'Blog Details' })
+    })
+    .catch((err) => {console.error(err)})
+})
+
 //create blog post
 app.get('/blogs/create', (req,res) => {
   res.render('create', {title: 'Create'})
