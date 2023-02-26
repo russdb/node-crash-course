@@ -16,12 +16,13 @@
 
   <script>
     const trashcan = document.querySelector('a.delete');
-    trashcan.addEventListener('click', (e) => {
+    trashcan.addEventListener('click', function(e) {
       const endpoint = `/blogs/${trashcan.dataset.doc}`;
+      console.info(endpoint)
       fetch(endpoint, {
         method: 'DELETE',
-      })
-      .then(response => response.json())
+      }) //promise
+      .then(response => response.json()) //response is the json data that comes back from app.js
       .then(data => window.location.href = data.redirect)
       .catch(err => console.log(err));
     });

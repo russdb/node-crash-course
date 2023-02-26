@@ -1,69 +1,70 @@
-const express = require('express')
-const morgan = require('morgan')
-const mongoose = require('mongoose')
-const Blog = require('./models/blog')
+const express = require('express');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const Blog = require('./models/blog');
 
-//creat an express app
-const app = express()
-//connect to mongodb
+// express app
+const app = express();
+
+// connect to mongodb & listen for requests
+// const dbURI = `mongodb+srv://${dbUser}:${dbpw}@nodetuts.dluumlr.mongodb.net/${dbName}?retryWrites=true&w=majority`
 let dbUser = 'russd',
     dbpw = 'qmd9RXlUiL6627Hz',
     dbName = 'node-tuts'
 const dbURI = `mongodb+srv://${dbUser}:${dbpw}@nodetuts.dluumlr.mongodb.net/${dbName}?retryWrites=true&w=majority`
-mongoose.connect(dbURI) //async
-  .then((result) => { 
-    console.info('connected to db')
-    app.listen(3000)
-  })
-  .catch((err) => { console.error(err)} )
 
-// register view engine with express
-app.set('view engine', 'ejs')
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(result => app.listen(3000))
+  .catch(err => console.log(err));
+
+// register view engine
+app.set('view engine', 'ejs');
 
 // middleware & static files
-app.use(express.static('public'))
-//take all url encoded data and pass into object
-app.use(express.urlencoded({ extended: true }))
-
-//add middleware
-app.use(morgan('dev'))
-//middleware must go above .get(), since it sends the response back on a match and it stops reading the file
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 app.use((req, res, next) => {
   res.locals.path = req.path;
   next();
 });
 
 // routes
-//respond to requests & route
-app.get('/', (req,res) => {
-  res.redirect('/blogs')
-})
+app.get('/', (req, res) => {
+  res.redirect('/blogs');
+});
 
-app.get('/about', (req,res) => {
-  res.render('about', {title: `About Us`})
-})
+app.get('/about', (req, res) => {
+  res.render('about', { title: 'About' });
+});
 
-//blog routes
-//create blog post
+// blog routes
+app.get('/blogs/create', (req, res) => {
+  res.render('create', { title: 'Create a new blog' });
+});
 
-app.get('/blogs', function(req,res){
-  Blog.find().sort({ createdAt: -1 }) //newest first
-  .then( (result) => { res.render('index',{title: 'All Blogs', blogs: result}) })
-  .catch((err) => {console.warn(err)})
-})
-app.get('/blogs/create', (req,res) => {
-  res.render('create', {title: 'Create'})
-})
+app.get('/blogs', (req, res) => {
+  Blog.find().sort({ createdAt: -1 })
+    .then(result => {
+      res.render('index', { blogs: result, title: 'All blogs' });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
 
-app.post('/blogs', function(req,res){
-  const blog = new Blog(req.body)
+app.post('/blogs', (req, res) => {
+  // console.log(req.body);
+  const blog = new Blog(req.body);
 
   blog.save()
-    .then((result) => {
-      res.redirect('/blogs')
+    .then(result => {
+      res.redirect('/blogs');
     })
-    .catch((err) => console.error(err))
-})
+    .catch(err => {
+      console.log(err);
+    });
+});
 
 app.get('/blogs/:id', (req, res) => {
   const id = req.params.id;
@@ -76,9 +77,19 @@ app.get('/blogs/:id', (req, res) => {
     });
 });
 
+app.delete('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+  
+  Blog.findByIdAndDelete(id)
+    .then(result => {
+      res.json({ redirect: '/blogs' });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
 
-//404 page, if no match with get() above, this will fire
-app.use((req,res) => {
-  res.status(404).render('404', {title: '404'})
-})
-//now do nodemon app
+// 404 page
+app.use((req, res) => {
+  res.status(404).render('404', { title: '404' });
+});
