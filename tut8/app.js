@@ -9,6 +9,9 @@ app.set('view engine', 'ejs')
 //now listen for requests
 app.listen(3000)
 
+// middleware & static files
+app.use(express.static('public'))
+
 //add middleware
 app.use(morgan('dev'))
 
