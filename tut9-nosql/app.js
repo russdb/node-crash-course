@@ -26,20 +26,23 @@ app.use(express.static('public'))
 
 //add middleware
 app.use(morgan('dev'))
+//middleware must go above .get(), since it sends the response back on a match and it stops reading the file
 
 
-//middleware must go above .get, since it sends the response back on a match and it stops reading the file
-//respond to requests
+//respond to requests & route
 app.get('/', (req,res) => {
-  const blogs = [
-    {title: 'This is a blog title', snippet: 'The man lowered his sunglasses and peered through the small opening of the keyhole. Inside, he saw a man sitting on the bed.'},
-    {title: 'This is a blog title', snippet: 'The man lowered his sunglasses and peered through the small opening of the keyhole. Inside, he saw a man sitting on the bed.'},
-    {title: 'This is a blog title', snippet: 'The man lowered his sunglasses and peered through the small opening of the keyhole. Inside, he saw a man sitting on the bed.'},
-  ]
-  res.render('index', {title: 'Home', blogs}) //can also be blogs: blog, but not needed if same name.
+  res.redirect('/blogs')
 })
+
 app.get('/about', (req,res) => {
   res.render('about', {title: `About Us`})
+})
+
+//blog routes
+app.get('/blogs', function(req,res){
+  Blog.find().sort({ createdAt: -1 }) //newest first
+    .then( (result) => { res.render('index',{title: 'All Blogs', blogs: result}) })
+    .catch((err) => {console.warn(err)})
 })
 //create blog post
 app.get('/blogs/create', (req,res) => {
