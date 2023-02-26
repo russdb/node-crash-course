@@ -28,7 +28,12 @@ app.use(express.urlencoded({ extended: true }))
 //add middleware
 app.use(morgan('dev'))
 //middleware must go above .get(), since it sends the response back on a match and it stops reading the file
+app.use((req, res, next) => {
+  res.locals.path = req.path;
+  next();
+});
 
+// routes
 //respond to requests & route
 app.get('/', (req,res) => {
   res.redirect('/blogs')
@@ -39,10 +44,15 @@ app.get('/about', (req,res) => {
 })
 
 //blog routes
+//create blog post
+
 app.get('/blogs', function(req,res){
   Blog.find().sort({ createdAt: -1 }) //newest first
-    .then( (result) => { res.render('index',{title: 'All Blogs', blogs: result}) })
-    .catch((err) => {console.warn(err)})
+  .then( (result) => { res.render('index',{title: 'All Blogs', blogs: result}) })
+  .catch((err) => {console.warn(err)})
+})
+app.get('/blogs/create', (req,res) => {
+  res.render('create', {title: 'Create'})
 })
 
 app.post('/blogs', function(req,res){
@@ -55,20 +65,18 @@ app.post('/blogs', function(req,res){
     .catch((err) => console.error(err))
 })
 
-app.get('/blogs/:id', function(req,res) {
-  const id = req.params.id //same name as ':id" in previous line
-  console.info(id)
-   Blog.findById(id)
-    .then((result) => {
-      res.render('details', { blog: result, title: 'Blog Details' })
+app.get('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+  Blog.findById(id)
+    .then(result => {
+      res.render('details', { blog: result, title: 'Blog Details' });
     })
-    .catch((err) => {console.error(err)})
-})
+    .catch(err => {
+      console.log(err);
+    });
+});
 
-//create blog post
-app.get('/blogs/create', (req,res) => {
-  res.render('create', {title: 'Create'})
-})
+
 //404 page, if no match with get() above, this will fire
 app.use((req,res) => {
   res.status(404).render('404', {title: '404'})
