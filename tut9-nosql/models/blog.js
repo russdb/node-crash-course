@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { stringify } = require('querystring')
 const Schema = mongoose.Schema
 const blogSchema = new Schema({
   title: {
@@ -15,3 +14,7 @@ const blogSchema = new Schema({
     required: true
   }
 }, { timestamps: true })
+
+
+const Blog = mongoose.model('Blog', blogSchema) //name is important, adds an 's' at the end
+

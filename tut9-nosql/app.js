@@ -1,14 +1,23 @@
 const express = require('express')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 //creat an express app
 const app = express()
 //connect to mongodb
-const dbURL = `mongodb+srv://russd:qmd9RXlUiL6627Hz@nodetuts.dluumlr.mongodb.net/?retryWrites=true&w=majority`
+let dbUser = 'russd',
+    dbpw = 'qmd9RXlUiL6627Hz',
+    dbName = 'node-tuts'
+const dbURI = `mongodb+srv://${dbUser}:${dbpw}@nodetuts.dluumlr.mongodb.net/${dbName}?retryWrites=true&w=majority`
+mongoose.connect(dbURI) //async
+  .then((result) => { 
+    console.info('connected to db')
+    app.listen(3000)
+  })
+  .catch((err) => { console.error(err)} )
+
 // register view engine with express
 app.set('view engine', 'ejs')
 
-//now listen for requests
-app.listen(3000)
 
 // middleware & static files
 app.use(express.static('public'))
