@@ -1,11 +1,7 @@
 /**
- * instead of restarting server manually, lets use nodemon
- * npm install -g nodemon
- * to use: nodemon fileName
- * this will be added to my package.json file
- * but added to gitignore
+ * express js is a great routing utility for nodevnp
+ * npm install express or npm install --save express if on old node
  */
-
 const http = require('http')
 const fs = require('fs')
 const _ = require('lodash')
