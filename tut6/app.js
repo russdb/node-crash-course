@@ -12,7 +12,6 @@ app.get('/', (req,res) => {
   // res.send('<p>home page</p>')
   res.sendFile('./views/index.html', {root: __dirname }) //relative path, so set the root
 })
-
 app.get('/about', (req,res) => {
   //express automatically does the header and status code
   // res.send('<p>about page</p>') 
@@ -23,5 +22,10 @@ app.get('/about', (req,res) => {
 //redirects
 app.get('/about-us', (req,res) => {
   res.redirect('/about')
+})
+
+//404 page, if no match with get() above, this will fire
+app.use((req,res) => {
+  res.sendFile('./views/404.html', {root:__dirname})
 })
 //now do nodemon app
