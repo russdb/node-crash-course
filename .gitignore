@@ -6,3 +6,5 @@ tut2/docs/blog5.txt
 tut2/assets
 tut2/assets/
 package-lock.json
+package.json
+node_modules
