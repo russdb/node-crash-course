@@ -19,14 +19,14 @@ app.get('/', (req,res) => {
   res.render('index', {title: 'Home', blogs}) //can also be blogs: blog, but not needed if same name.
 })
 app.get('/about', (req,res) => {
-  res.render('about')
+  res.render('about', {title: `About Us`})
 })
 //create blog post
 app.get('/blogs/create', (req,res) => {
-  res.render('create')
+  res.render('create', {title: 'Create'})
 })
 //404 page, if no match with get() above, this will fire
 app.use((req,res) => {
-  res.status(404).render('404')
+  res.status(404).render('404', {title: '404'})
 })
 //now do nodemon app
