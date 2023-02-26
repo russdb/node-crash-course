@@ -8,11 +8,21 @@
 
 const http = require('http')
 const fs = require('fs')
+const _ = require('lodash')
+
 const server = http.createServer((req, res) => {
-  // console.info(req)
-  console.info(`${req.url}, ${req.method}`)
-  //add a response to make the webpage do something other than hang when making a request
-  //need to set headers first, content type first
+
+  //lodash
+  const num = _.random(0,20)
+  console.info(num)
+
+  const greet = _.once(() => {
+    console.info(`hello`)
+  })
+
+  greet()
+
+  //set header
   res.setHeader('Content-Type', 'text/html') //can be plain,html, etc
   let path = `./views/`
 
