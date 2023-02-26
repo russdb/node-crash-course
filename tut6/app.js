@@ -12,4 +12,9 @@ app.get('/', (req,res) => {
   res.send('<p>home page</p>') 
 })
 
+app.get('/about', (req,res) => {
+  //express automatically does the header and status code
+  res.send('<p>about page</p>') 
+})
+
 //now do nodemon app
