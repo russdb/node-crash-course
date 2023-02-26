@@ -1,5 +1,5 @@
 const express = require('express')
-
+const morgan = require('morgan')
 //creat an express app
 const app = express()
 
@@ -9,6 +9,10 @@ app.set('view engine', 'ejs')
 //now listen for requests
 app.listen(3000)
 
+//add middleware
+app.use(morgan('dev'))
+
+//middleware must go above .get, since it sends the response back on a match and it stops reading the file
 //respond to requests
 app.get('/', (req,res) => {
   const blogs = [
