@@ -2,7 +2,8 @@ const express = require('express')
 const morgan = require('morgan')
 //creat an express app
 const app = express()
-
+//connect to mongodb
+const dbURL = `mongodb+srv://russd:qmd9RXlUiL6627Hz@nodetuts.dluumlr.mongodb.net/?retryWrites=true&w=majority`
 // register view engine with express
 app.set('view engine', 'ejs')
 
