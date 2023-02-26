@@ -15,12 +15,10 @@ app.get('/about', (req,res) => {
   //express automatically does the header and status code
   res.sendFile('./views/about.html', {root: __dirname }) //relative path, so set the root
 })
-
 //redirects
 app.get('/about-us', (req,res) => {
   res.redirect('/about')
 })
-
 //404 page, if no match with get() above, this will fire
 app.use((req,res) => {
   //can set status at same time
