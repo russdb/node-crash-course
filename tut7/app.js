@@ -11,7 +11,7 @@ app.listen(3000)
 
 //respond to requests
 app.get('/', (req,res) => {
-  res.render('index')
+  res.render('index', {title: 'Home'})
 })
 app.get('/about', (req,res) => {
   res.render('about')
