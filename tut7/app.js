@@ -11,20 +11,17 @@ app.listen(3000)
 
 //respond to requests
 app.get('/', (req,res) => {
-  //express automatically does the header and status code
-  res.sendFile('./views/index.html', {root: __dirname }) //relative path, so set the root
+  res.render('index')
 })
 app.get('/about', (req,res) => {
-  //express automatically does the header and status code
-  res.sendFile('./views/about.html', {root: __dirname }) //relative path, so set the root
+  res.render('about')
 })
-//redirects
-app.get('/about-us', (req,res) => {
-  res.redirect('/about')
+//create blog post
+app.get('/blogs/create', (req,res) => {
+  res.render('create')
 })
 //404 page, if no match with get() above, this will fire
 app.use((req,res) => {
-  //can set status at same time
-  res.status(404).sendFile('./views/404.html', {root:__dirname})
+  res.status(404).render('404')
 })
 //now do nodemon app
