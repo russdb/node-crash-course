@@ -1,4 +1,5 @@
-
+.gitignore
+pw.txt
 tut2/docs/blog2.txt
 tut2/docs/deleteme.txt
 tut2/docs/blog4.txt
