@@ -11,7 +11,12 @@ app.listen(3000)
 
 //respond to requests
 app.get('/', (req,res) => {
-  res.render('index', {title: 'Home'})
+  const blogs = [
+    {title: 'This is a blog title', snippet: 'The man lowered his sunglasses and peered through the small opening of the keyhole. Inside, he saw a man sitting on the bed.'},
+    {title: 'This is a blog title', snippet: 'The man lowered his sunglasses and peered through the small opening of the keyhole. Inside, he saw a man sitting on the bed.'},
+    {title: 'This is a blog title', snippet: 'The man lowered his sunglasses and peered through the small opening of the keyhole. Inside, he saw a man sitting on the bed.'},
+  ]
+  res.render('index', {title: 'Home', blogs}) //can also be blogs: blog, but not needed if same name.
 })
 app.get('/about', (req,res) => {
   res.render('about')

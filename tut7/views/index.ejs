@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Node JS Crash Course 🚀</title>
+  <title>NCC | <%= title %> 🚀</title>
 </head>
 <body>
 
@@ -23,7 +23,16 @@
 
   <div class="blogs content">
     <h2>ALl Blogs</h2>
-    Hello <%= name %>!
+    Hello <%= name %>!  
+
+    <% if (blogs.length > 0) { %>
+    <% blogs.forEach(blog => { %>
+      <h3 class="title"><%= blog.title %></h3>
+      <p class="snippet"><%= blog.snippet %></p>
+    <% }) %>
+    <% } else { %>
+    <p>there are no blogs to display</p>
+    <% } %>
   </div>
 </body>
 </html>
