@@ -19,4 +19,9 @@ app.get('/about', (req,res) => {
   res.sendFile('./views/about.html', {root: __dirname }) //relative path, so set the root
 
 })
+
+//redirects
+app.get('/about-us', (req,res) => {
+  res.redirect('/about')
+})
 //now do nodemon app
