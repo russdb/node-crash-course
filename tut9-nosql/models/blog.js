@@ -17,4 +17,5 @@ const blogSchema = new Schema({
 
 
 const Blog = mongoose.model('Blog', blogSchema) //name is important, adds an 's' at the end
+module.exports = Blog
 
