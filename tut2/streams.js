@@ -1,7 +1,9 @@
+//with streams, the data can be used before it is available
+
 const fs = require('fs')
 
 //the encoding is optional
-const readStream = fs.createReadStream('./docs/blog3.txt', {encoding: 'utf8' })
+const readStream = fs.createReadStream('./docs/blog3.txt', {encoding: 'utf8' }) //utf8 makes it readable
 const writeStream = fs.createWriteStream('./docs/blog4.txt')
 //on data event listener
 readStream.on('data', (chunk) => {

@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 //reading files, async function
-fs.readFile('./docs/blog1.txt', (err, data) => {
+fs.readFile('./docs/blog1.txt', (err, data) => { //(err,data) is callback that runs after readfile is done
   if (err) {
     console.error(err)
   }
