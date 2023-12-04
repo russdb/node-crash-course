@@ -3,8 +3,14 @@
 <%- include('./partials/head.ejs')%>
 <body>
 
+  <!--setting a valua in ejs-->
   <% const name = 'mario' %>
-  <!-- includes are called "partials" in ejs -->
+
+  <!-- includes are called "partials" in ejs 
+    using the - prefix will not escape special 
+    characters and will render the html tags in stead
+    of producing raw text like with = sign
+  -->
   <%- include('./partials/nav.ejs')%>
 
   <div class="blogs content">
@@ -16,7 +22,7 @@
       <p class="snippet"><%= blog.snippet %></p>
     <% }) %>
     <% } else { %>
-    <p>there are no blogs to display</p>
+      <p>😟 Sorry, there are no blogs to display.</p>
     <% } %>
   </div>
   
