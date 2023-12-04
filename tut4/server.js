@@ -1,3 +1,6 @@
+// using the `views` folder
+// start with `node server` and to go localhost:3000
+
 const http = require('http')
 const fs = require('fs')
 const server = http.createServer((req, res) => {
@@ -9,12 +12,16 @@ const server = http.createServer((req, res) => {
   let path = `./views/`
 
   /* Responses
+
+    describe the type of response sent to the browser
+
     100 range - informational
     200 range - success codes
     300 range - codes for redirects
     400 range - user or client errors
     500 range - server errors
-  */ 
+  
+    */ 
   //this is where express.js can help, but here it is under the hood
   switch (req.url) {
     case '/':
