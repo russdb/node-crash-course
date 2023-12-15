@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const Blog = require('./models/blog');
 
 // express app
+//express allows for easier routing with methods and properties to help
+//the app is easier to update as well
 const app = express();
 
 // connect to mongodb & listen for requests

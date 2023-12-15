@@ -60,7 +60,7 @@ app.get('/single-blog', (req, res) => {
       console.log(err);
     });
 });
-
+//redirect to blogs
 app.get('/', (req, res) => {
   res.redirect('/blogs');
 });
@@ -75,7 +75,7 @@ app.get('/blogs/create', (req, res) => {
 });
 
 app.get('/blogs', (req, res) => {
-  Blog.find().sort({ createdAt: -1 })
+  Blog.find().sort({ createdAt: -1 }) //descending
     .then(result => {
       res.render('index', { blogs: result, title: 'All blogs' });
     })

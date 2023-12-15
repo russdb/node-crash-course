@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+//describe the properties of the documents
 const blogSchema = new Schema({
   title: {
     type: String,
@@ -15,7 +16,7 @@ const blogSchema = new Schema({
   }
 }, { timestamps: true })
 
-
+//the model allows you to interact with the schema above
 const Blog = mongoose.model('Blog', blogSchema) //name is important, adds an 's' at the end
 module.exports = Blog
 

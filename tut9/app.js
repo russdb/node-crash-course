@@ -1,3 +1,8 @@
+//nosql has collections, similar to tables
+//can have as many collections as you want
+//holds a series of key value pairs
+//this uses mongodbatlas service
+
 const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
@@ -5,7 +10,13 @@ const Blog = require('./models/blog')
 
 //creat an express app
 const app = express()
+
+//mongoose is an ORM library, object document mapping
+//can use models that allow us to do stuff, like findbyid, delete, etc
 //connect to mongodb
+//schema defines what property an element has, such as a user or a blog entry
+//blog schema: title, text, etc
+//will have methods that help us do stuff, such as getting, saving, deleting, etc
 let dbUser = 'russd',
     dbpw = 'qmd9RXlUiL6627Hz',
     dbName = 'node-tuts'
@@ -13,7 +24,7 @@ const dbURI = `mongodb+srv://${dbUser}:${dbpw}@nodetuts.dluumlr.mongodb.net/${db
 mongoose.connect(dbURI) //async
   .then((result) => { 
     console.info('connected to db')
-    app.listen(3000)
+    app.listen(3000) //we need to connect to the db before making requests
   })
   .catch((err) => { console.error(err)} )
 

@@ -38,7 +38,7 @@ app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
 
-// blog routes
+// blog routes with a url scope of /blogs
 app.use('/blogs', blogRoutes)
 
 // 404 page
